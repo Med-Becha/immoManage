@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class Signinscreen extends StatefulWidget {
+  const Signinscreen({super.key});
+
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<Signinscreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController loginController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _LoginScreenState extends State<Signinscreen> {
+  TextEditingController mailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController passwrodController = TextEditingController();
+  TextEditingController confirmPasswrodController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +31,38 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _page() {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Center(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _icon(),
             const SizedBox(
               height: 50,
             ),
-            _inputField("Login", loginController),
+            _inputField("e-mail", mailController),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
-            _inputField("Password", passwordController, isPassword: true),
+            _inputField("nom et prenom", fullNameController),
             const SizedBox(
-              height: 50,
+              height: 15,
+            ),
+            _inputField("mot de passe", passwrodController, isPassword: true),
+            const SizedBox(
+              height: 15,
+            ),
+            _inputField(
+              "Confirmer le mot de password",
+              confirmPasswrodController,
+              isPassword: true,
+            ),
+            const SizedBox(
+              height: 25,
             ),
             _loginBtn(),
             const SizedBox(
-              height: 50,
+              height: 25,
             ),
             _loginText()
           ],
@@ -87,8 +102,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _loginBtn() {
     return ElevatedButton(
       onPressed: () {
-        debugPrint('login : ' + loginController.text);
-        debugPrint('password : ' + passwordController.text);
+        debugPrint('email  : ${mailController.text}');
+        debugPrint(' nom et prenom : ${fullNameController.text}');
+        debugPrint(' password1: ${passwrodController.text}');
+        debugPrint('password2 : ${confirmPasswrodController.text}');
+        Navigator.of(context).pushReplacementNamed("/");
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -112,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
-      onPressed: () => Navigator.of(context).pushNamed('/signin'),
+      onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
     );
   }
 }

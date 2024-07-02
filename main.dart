@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manage/routes/route_generator.dart';
+import 'package:immo_manage/routes/RouteGenerator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,6 +7,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  final bool isLoggedIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/home',
+      initialRoute: isLoggedIn ? "/" : "/login",
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

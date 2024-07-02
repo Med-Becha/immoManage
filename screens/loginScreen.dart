@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Signinscreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  State<Signinscreen> createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<Signinscreen> {
-  TextEditingController mailController = TextEditingController();
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController passwrodController = TextEditingController();
-  TextEditingController confirmPasswrodController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController loginController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,42 +29,32 @@ class _LoginScreenState extends State<Signinscreen> {
   }
 
   Widget _page() {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _icon(),
-            const SizedBox(
-              height: 50,
-            ),
-            _inputField("e-mail", mailController),
-            const SizedBox(
-              height: 15,
-            ),
-            _inputField("nom et prenom", fullNameController),
-            const SizedBox(
-              height: 15,
-            ),
-            _inputField("mot de passe", passwrodController, isPassword: true),
-            const SizedBox(
-              height: 15,
-            ),
-            _inputField(
-              "Confirmer le mot de password",
-              confirmPasswrodController,
-              isPassword: true,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            _loginBtn(),
-            const SizedBox(
-              height: 25,
-            ),
-            _loginText()
-          ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _icon(),
+              const SizedBox(
+                height: 50,
+              ),
+              _inputField("Login", loginController),
+              const SizedBox(
+                height: 20,
+              ),
+              _inputField("Password", passwordController, isPassword: true),
+              const SizedBox(
+                height: 50,
+              ),
+              _loginBtn(),
+              const SizedBox(
+                height: 50,
+              ),
+              _loginText()
+            ],
+          ),
         ),
       ),
     );
@@ -101,10 +91,8 @@ class _LoginScreenState extends State<Signinscreen> {
   Widget _loginBtn() {
     return ElevatedButton(
       onPressed: () {
-        debugPrint('email  : ' + mailController.text);
-        debugPrint(' nom et prenom : ' + fullNameController.text);
-        debugPrint(' password1: ' + passwrodController.text);
-        debugPrint('password2 : ' + confirmPasswrodController.text);
+        debugPrint('login : ${loginController.text}');
+        debugPrint('password : ${passwordController.text}');
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -128,7 +116,7 @@ class _LoginScreenState extends State<Signinscreen> {
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
-      onPressed: () => Navigator.of(context).pushNamed('/login'),
+      onPressed: () => Navigator.of(context).pushReplacementNamed('/signin'),
     );
   }
 }
