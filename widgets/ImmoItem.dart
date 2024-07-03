@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:immo_manage/widgets/ImmoItemTrait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Immoitem extends StatelessWidget {
-  const Immoitem({super.key, required this.header});
+  const Immoitem(
+      {super.key,
+      required this.header,
+      required this.localisation,
+      required this.label,
+      required this.imgUrl,
+      required this.occupation});
   final String header;
+  final String localisation;
+  final String label;
+  final String imgUrl;
+  final String occupation;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +31,8 @@ class Immoitem extends StatelessWidget {
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
               image: NetworkImage(
-                  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                imgUrl,
+              ),
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -30,7 +42,7 @@ class Immoitem extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                color: Colors.black54,
+                color: const Color.fromARGB(194, 33, 149, 243),
                 padding:
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(
@@ -40,13 +52,17 @@ class Immoitem extends StatelessWidget {
                         textAlign: TextAlign.center,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
-                    SizedBox(height: 12),
                     Row(
-                      children: [],
+                      children: [
+                        ImmoItemTrait(
+                          label: label,
+                          localisation: localisation,
+                        )
+                      ],
                     ),
                   ],
                 ),

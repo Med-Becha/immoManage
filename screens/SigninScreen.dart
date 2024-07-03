@@ -16,16 +16,8 @@ class _LoginScreenState extends State<Signinscreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [Colors.blue, Colors.red],
-        ),
-      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: _page(),
+        body: SafeArea(child: _page()),
       ),
     );
   }
@@ -74,9 +66,9 @@ class _LoginScreenState extends State<Signinscreen> {
   Widget _icon() {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.white, width: 2),
+          border: Border.all(color: Colors.blue, width: 2),
           shape: BoxShape.circle),
-      child: const Icon(Icons.person, color: Colors.white, size: 120),
+      child: const Icon(Icons.person, color: Colors.blue, size: 120),
     );
   }
 
@@ -84,15 +76,15 @@ class _LoginScreenState extends State<Signinscreen> {
       {isPassword = false}) {
     var border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(18),
-      borderSide: const BorderSide(color: Colors.white),
+      borderSide: const BorderSide(color: Colors.blue),
     );
 
     return TextField(
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.blue),
       controller: controller,
       decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(color: Colors.white),
+          hintStyle: const TextStyle(color: Colors.blue),
           enabledBorder: border,
           focusedBorder: border),
       obscureText: isPassword,
@@ -100,7 +92,7 @@ class _LoginScreenState extends State<Signinscreen> {
   }
 
   Widget _loginBtn() {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: () {
         debugPrint('email  : ${mailController.text}');
         debugPrint(' nom et prenom : ${fullNameController.text}');
@@ -108,16 +100,16 @@ class _LoginScreenState extends State<Signinscreen> {
         debugPrint('password2 : ${confirmPasswrodController.text}');
         Navigator.of(context).pushReplacementNamed("/");
       },
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-      ),
+      style: OutlinedButton.styleFrom(
+          // shape: const StadiumBorder(),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          side: BorderSide(color: Colors.blue, width: 1)),
       child: const SizedBox(
         width: double.infinity,
         child: Text(
           'Sign in',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, color: Colors.blue),
         ),
       ),
     );
@@ -128,7 +120,7 @@ class _LoginScreenState extends State<Signinscreen> {
       child: const Text(
         "Don't have an account ? Sign Up",
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 16, color: Colors.white),
+        style: TextStyle(fontSize: 16, color: Colors.blue),
       ),
       onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
     );

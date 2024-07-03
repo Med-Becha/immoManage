@@ -13,8 +13,12 @@ class _ProfilescreenState extends State<Profilescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.blue,
-        title: const Text("Profile"),
+        title: const Text(
+          "Profile",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
@@ -55,6 +59,10 @@ class _ProfilescreenState extends State<Profilescreen> {
               height: 15,
             ),
             _itemProfile("CIN", "00000000", CupertinoIcons.barcode),
+            const SizedBox(
+              height: 15,
+            ),
+            _EditBtn()
           ],
         ),
       ),
@@ -64,15 +72,36 @@ class _ProfilescreenState extends State<Profilescreen> {
 
 Widget _itemProfile(String title, String subtitle, IconData iconData) {
   return ListTile(
-    title: Text(title),
-    subtitle: Text(subtitle),
-    leading: Icon(iconData),
-    trailing: const Icon(
-      Icons.arrow_forward,
-      color: Colors.grey,
+    title: Text(
+      title,
+      style: TextStyle(color: Colors.blue),
     ),
+    subtitle: Text(subtitle, style: TextStyle(color: Colors.blue)),
+    leading: Icon(
+      iconData,
+      color: Colors.blue,
+    ),
+
     tileColor: Colors.white,
     //push to edit profile
     onTap: () {},
+  );
+}
+
+Widget _EditBtn() {
+  return OutlinedButton(
+    onPressed: () {},
+    style: OutlinedButton.styleFrom(
+        // shape: const StadiumBorder(),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        side: BorderSide(color: Colors.blue, width: 1)),
+    child: const SizedBox(
+      width: double.infinity,
+      child: Text(
+        'Modifier',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 20, color: Colors.blue),
+      ),
+    ),
   );
 }

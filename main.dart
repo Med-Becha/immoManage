@@ -7,11 +7,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  final bool isLoggedIn = false;
+  final bool isLoggedIn = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
