@@ -46,7 +46,9 @@ class LeftDrawer extends StatelessWidget {
               'Contrats de location',
               style: TextStyle(color: Colors.blue),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed("/contracts");
+            },
           ),
           const Divider(),
           ListTile(
@@ -59,7 +61,7 @@ class LeftDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.blue),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed("");
+              Navigator.of(context).pushNamed("/allusers");
             },
           ),
           ListTile(

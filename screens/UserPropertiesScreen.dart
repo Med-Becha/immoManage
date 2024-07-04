@@ -20,7 +20,9 @@ class _UserPropertiesScreenState extends State<UserPropertiesScreen> {
         backgroundColor: Colors.blue,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "/addproperties");
+            },
             icon: const Icon(
               Icons.add_home_work_outlined,
               color: Colors.white,

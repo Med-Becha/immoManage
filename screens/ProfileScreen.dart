@@ -62,7 +62,7 @@ class _ProfilescreenState extends State<Profilescreen> {
             const SizedBox(
               height: 15,
             ),
-            _EditBtn()
+            _EditBtn(context)
           ],
         ),
       ),
@@ -88,9 +88,11 @@ Widget _itemProfile(String title, String subtitle, IconData iconData) {
   );
 }
 
-Widget _EditBtn() {
+Widget _EditBtn(context) {
   return OutlinedButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.pushNamed(context, "/editprofile");
+    },
     style: OutlinedButton.styleFrom(
         // shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
