@@ -55,7 +55,7 @@ class AllUsersScreen extends StatelessWidget {
     for (int i = 0; i < titles.length; i++) {
       listTiles.add(
         ListTile(
-          hoverColor: Colors.lightBlue,
+          hoverColor: const Color.fromARGB(78, 3, 168, 244),
           leading: const Icon(
             Icons.person_2_outlined,
             color: Colors.blue,

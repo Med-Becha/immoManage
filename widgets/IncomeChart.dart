@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class Incomechart extends StatelessWidget {
+  const Incomechart({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +32,7 @@ class Incomechart extends StatelessWidget {
                   color: Colors.blue,
                   belowBarData: BarAreaData(
                     show: true,
-                    color: Color.fromARGB(109, 33, 149, 243),
+                    color: const Color.fromARGB(109, 33, 149, 243),
                   ),
                 )
               ],
@@ -40,12 +42,12 @@ class Incomechart extends StatelessWidget {
                   sideTitles: SideTitles(showTitles: false, interval: 2),
                 ),
                 topTitles: AxisTitles(
-                    axisNameWidget: const Text("revenus par mois"),
+                    axisNameWidget: Text("revenus par mois"),
                     sideTitles: SideTitles(
                         showTitles: false, reservedSize: 20, interval: 3)),
                 show: true,
               ),
-              gridData: FlGridData(
+              gridData: const FlGridData(
                   show: true,
                   drawHorizontalLine: true,
                   drawVerticalLine: true)),

@@ -14,7 +14,7 @@ class EditProfileScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: Text('Edit profile screen'),
+      body: const Text('Edit profile screen'),
     );
   }
 }

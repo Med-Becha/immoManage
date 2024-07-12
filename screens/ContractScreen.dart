@@ -10,7 +10,7 @@ class ContractScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.blue,
         title: const Text(
-          "Profile",
+          "Contrats",
           style: TextStyle(color: Colors.white),
         ),
       ),

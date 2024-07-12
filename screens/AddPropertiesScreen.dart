@@ -14,7 +14,7 @@ class AddPropertiesScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: Text("Add properties Screen"),
+      body: const Text("Add properties Screen"),
     );
   }
 }

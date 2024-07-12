@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
-import 'package:immo_manage/widgets/LeftDrawer.dart';
-import 'package:immo_manage/widgets/Filters.dart';
-import 'package:immo_manage/widgets/ImmoItem.dart';
+import 'package:immo_manager/widgets/LeftDrawer.dart';
+import 'package:immo_manager/widgets/Filters.dart';
+import 'package:immo_manager/widgets/ImmoItem.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

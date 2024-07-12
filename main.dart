@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manage/routes/RouteGenerator.dart';
+import 'package:immo_manager/routes/RouteGenerator.dart';
 
 void main() {
   runApp(const MyApp());

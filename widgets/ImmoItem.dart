@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:immo_manage/widgets/ImmoItemTrait.dart';
+import 'package:immo_manager/widgets/ImmoItemTrait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Immoitem extends StatelessWidget {

@@ -20,7 +20,7 @@ class _FiltersState extends State<Filters> {
   String? _selectedState;
 
   //dropDown items list:
-  List<String> _dropDownItems = [
+  final List<String> _dropDownItems = [
     'Tous',
     'Disponibles',
     'Occupées',
@@ -92,11 +92,11 @@ class _FiltersState extends State<Filters> {
               )
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             children: [
               DropdownButton<String>(
-                hint: Text('Etat'),
+                hint: const Text('Etat'),
                 value: _selectedState,
                 onChanged: (String? value) {
                   if (value == null) {
@@ -120,7 +120,7 @@ class _FiltersState extends State<Filters> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               ),
               ElevatedButton(
                   onPressed: () {
@@ -130,7 +130,7 @@ class _FiltersState extends State<Filters> {
                     print(_selectedDate);
                     Navigator.pop(context);
                   },
-                  child: Text('search'))
+                  child: const Text('search'))
             ],
           )
         ],

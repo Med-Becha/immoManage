@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manage/widgets/ImmoItem.dart';
+import 'package:immo_manager/widgets/ImmoItem.dart';
 
 class UserPropertiesScreen extends StatefulWidget {
   const UserPropertiesScreen({super.key});

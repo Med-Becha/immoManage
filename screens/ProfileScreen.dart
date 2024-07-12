@@ -74,9 +74,9 @@ Widget _itemProfile(String title, String subtitle, IconData iconData) {
   return ListTile(
     title: Text(
       title,
-      style: TextStyle(color: Colors.blue),
+      style: const TextStyle(color: Colors.blue),
     ),
-    subtitle: Text(subtitle, style: TextStyle(color: Colors.blue)),
+    subtitle: Text(subtitle, style: const TextStyle(color: Colors.blue)),
     leading: Icon(
       iconData,
       color: Colors.blue,
@@ -96,7 +96,7 @@ Widget _EditBtn(context) {
     style: OutlinedButton.styleFrom(
         // shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
-        side: BorderSide(color: Colors.blue, width: 1)),
+        side: const BorderSide(color: Colors.blue, width: 1)),
     child: const SizedBox(
       width: double.infinity,
       child: Text(

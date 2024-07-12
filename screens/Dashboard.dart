@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manage/widgets/IncomeChart.dart';
-import 'package:immo_manage/widgets/PropertiesStatusChart.dart';
+import 'package:immo_manager/widgets/IncomeChart.dart';
+import 'package:immo_manager/widgets/PropertiesStatusChart.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -22,9 +22,9 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       body: ListView(
-        children: [
+        children: const [
           PropertiesStatusChart(),
-          const SizedBox(
+          SizedBox(
             height: 20,
           ),
           Incomechart()

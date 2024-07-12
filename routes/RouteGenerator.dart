@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manage/screens/AddPropertiesScreen.dart';
-import 'package:immo_manage/screens/AllUsersScreen.dart';
-import 'package:immo_manage/screens/ContractScreen.dart';
-import 'package:immo_manage/screens/Dashboard.dart';
-import 'package:immo_manage/screens/EditProfileScreen.dart';
-import 'package:immo_manage/screens/HomeScreen.dart';
-import 'package:immo_manage/screens/ProfileScreen.dart';
-import 'package:immo_manage/screens/SigninScreen.dart';
-import 'package:immo_manage/screens/UserPropertiesScreen.dart';
-import 'package:immo_manage/screens/loginScreen.dart';
+import 'package:immo_manager/screens/AddPropertiesScreen.dart';
+import 'package:immo_manager/screens/AllUsersScreen.dart';
+import 'package:immo_manager/screens/ContractScreen.dart';
+import 'package:immo_manager/screens/Dashboard.dart';
+import 'package:immo_manager/screens/EditProfileScreen.dart';
+import 'package:immo_manager/screens/HomeScreen.dart';
+import 'package:immo_manager/screens/ProfileScreen.dart';
+import 'package:immo_manager/screens/SigninScreen.dart';
+import 'package:immo_manager/screens/UserPropertiesScreen.dart';
+import 'package:immo_manager/screens/loginScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

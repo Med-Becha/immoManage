@@ -1,8 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:immo_manage/widgets/Indicator.dart';
+import 'package:immo_manager/widgets/Indicator.dart';
 
 class PropertiesStatusChart extends StatelessWidget {
+  const PropertiesStatusChart({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -19,15 +21,15 @@ class PropertiesStatusChart extends StatelessWidget {
                   PieChartSectionData(
                       value: 20,
                       color: Colors.red,
-                      titleStyle: TextStyle(color: Colors.white)),
+                      titleStyle: const TextStyle(color: Colors.white)),
                   PieChartSectionData(
                       value: 30,
                       color: Colors.blue,
-                      titleStyle: TextStyle(color: Colors.white)),
+                      titleStyle: const TextStyle(color: Colors.white)),
                   PieChartSectionData(
                     value: 70,
                     color: Colors.green,
-                    titleStyle: TextStyle(
+                    titleStyle: const TextStyle(
                       color: Colors.white,
                     ),
                   )
