@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:immo_manager/controller/authController.dart';
 
 class LeftDrawer extends StatelessWidget {
-  const LeftDrawer({super.key});
+  LeftDrawer({super.key});
+
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
-          const UserAccountsDrawerHeader(
-            accountName: Text("Mohamed Becha"),
-            accountEmail: Text("medbesha@gmail.com"),
-            decoration: BoxDecoration(color: Colors.blue),
-          ),
+          Obx(() {
+            final user = authController.user.value;
+            return UserAccountsDrawerHeader(
+              accountName: Text(user?.name ?? "undefined"),
+              accountEmail: Text(user?.email ?? "undefined"),
+              decoration: const BoxDecoration(color: Colors.blue),
+            );
+          }),
           ListTile(
             leading: const Icon(
               Icons.person_2_outlined,
@@ -35,7 +42,9 @@ class LeftDrawer extends StatelessWidget {
               'Mon Propriétés',
               style: TextStyle(color: Colors.blue),
             ),
-            onTap: () => Navigator.of(context).pushNamed("/userproperties"),
+            onTap: () {
+              Navigator.of(context).pushNamed("/userproperties");
+            },
           ),
           ListTile(
             leading: const Icon(
@@ -43,7 +52,7 @@ class LeftDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
             title: const Text(
-              'Contrats de location',
+              'Contrats',
               style: TextStyle(color: Colors.blue),
             ),
             onTap: () {
@@ -88,9 +97,9 @@ class LeftDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.blue),
             ),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("/login");
+              authController.signOut();
             },
-          )
+          ),
         ],
       ),
     );

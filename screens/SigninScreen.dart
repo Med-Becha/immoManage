@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:immo_manager/controller/authController.dart';
 
 class Signinscreen extends StatefulWidget {
   const Signinscreen({super.key});
 
   @override
-  State<Signinscreen> createState() => _LoginScreenState();
+  State<Signinscreen> createState() => _SigninscreenState();
 }
 
-class _LoginScreenState extends State<Signinscreen> {
+class _SigninscreenState extends State<Signinscreen> {
   TextEditingController mailController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController passwrodController = TextEditingController();
   TextEditingController confirmPasswrodController = TextEditingController();
 
+  final AuthController authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(child: _page()),
-      ),
+    return Scaffold(
+      body: SafeArea(child: _page()),
     );
   }
 
@@ -40,6 +43,10 @@ class _LoginScreenState extends State<Signinscreen> {
             const SizedBox(
               height: 15,
             ),
+            _inputField("Phone", phoneController),
+            const SizedBox(
+              height: 15,
+            ),
             _inputField("mot de passe", passwrodController, isPassword: true),
             const SizedBox(
               height: 15,
@@ -52,7 +59,7 @@ class _LoginScreenState extends State<Signinscreen> {
             const SizedBox(
               height: 25,
             ),
-            _loginBtn(),
+            _signinBtn(),
             const SizedBox(
               height: 25,
             ),
@@ -91,19 +98,27 @@ class _LoginScreenState extends State<Signinscreen> {
     );
   }
 
-  Widget _loginBtn() {
+  Widget _signinBtn() {
     return OutlinedButton(
       onPressed: () {
-        debugPrint('email  : ${mailController.text}');
-        debugPrint(' nom et prenom : ${fullNameController.text}');
-        debugPrint(' password1: ${passwrodController.text}');
-        debugPrint('password2 : ${confirmPasswrodController.text}');
-        Navigator.of(context).pushReplacementNamed("/");
+        final email = mailController.text;
+        final fullName = fullNameController.text;
+        final password = passwrodController.text;
+        final phone = phoneController.text;
+
+        final confirmPassword = confirmPasswrodController.text;
+
+        if (password != confirmPassword) {
+          Get.snackbar('Error', 'Passwords do not match');
+          return;
+        }
+
+        authController.register(fullName, email, password, phone);
       },
       style: OutlinedButton.styleFrom(
-          // shape: const StadiumBorder(),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          side: const BorderSide(color: Colors.blue, width: 1)),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        side: const BorderSide(color: Colors.blue, width: 1),
+      ),
       child: const SizedBox(
         width: double.infinity,
         child: Text(

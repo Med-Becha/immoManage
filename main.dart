@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manager/routes/RouteGenerator.dart';
+import 'package:get/get.dart';
+import 'package:immo_manager/controller/authController.dart';
+import 'package:immo_manager/controller/propertyController.dart';
+import 'package:immo_manager/routes/routeGenerator.dart';
 
 void main() {
-  runApp(const MyApp());
+  Get.put(AuthController());
+  Get.put(PropertyController());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
   final bool isLoggedIn = true;
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: isLoggedIn ? "/" : "/login",
+      initialRoute: authController.isLoggedIn() ? "/" : "/login",
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

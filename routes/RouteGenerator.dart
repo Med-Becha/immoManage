@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:immo_manager/screens/AddPropertiesScreen.dart';
+import 'package:immo_manager/screens/addPropertiesScreen.dart';
 import 'package:immo_manager/screens/AllUsersScreen.dart';
 import 'package:immo_manager/screens/ContractScreen.dart';
 import 'package:immo_manager/screens/Dashboard.dart';
 import 'package:immo_manager/screens/EditProfileScreen.dart';
-import 'package:immo_manager/screens/HomeScreen.dart';
+import 'package:immo_manager/screens/homeScreen.dart';
 import 'package:immo_manager/screens/ProfileScreen.dart';
 import 'package:immo_manager/screens/SigninScreen.dart';
 import 'package:immo_manager/screens/UserPropertiesScreen.dart';
@@ -30,7 +30,7 @@ class RouteGenerator {
       case "/contracts":
         return MaterialPageRoute(builder: (_) => const ContractScreen());
       case '/addproperties':
-        return MaterialPageRoute(builder: (_) => const AddPropertiesScreen());
+        return MaterialPageRoute(builder: (_) => AddPropertiesScreen());
       case "/editprofile":
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
       default:

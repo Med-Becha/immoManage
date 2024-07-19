@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:immo_manager/controller/authController.dart';
 
 class Profilescreen extends StatefulWidget {
   const Profilescreen({super.key});
@@ -9,6 +11,8 @@ class Profilescreen extends StatefulWidget {
 }
 
 class _ProfilescreenState extends State<Profilescreen> {
+  final AuthController authController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,51 +24,49 @@ class _ProfilescreenState extends State<Profilescreen> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(9.0),
-        child: Column(
-          children: [
-            const CircleAvatar(
-              radius: 30,
-              child: CircleAvatar(
-                backgroundColor:
-                    Colors.blue, // Background color of the circle avatar
-                radius: 50, // Radius of the circle avatar
-                child: Icon(
-                  Icons.person, // Icon to display inside the circle avatar
-                  size: 40, // Size of the icon
-                  color: Colors.white, // Color of the icon
+      body: Obx(
+        () {
+          final user = authController.user.value;
+          return Padding(
+            padding: const EdgeInsets.all(9.0),
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  radius: 30,
+                  child: CircleAvatar(
+                    backgroundColor:
+                        Colors.blue, // Background color of the circle avatar
+                    radius: 50, // Radius of the circle avatar
+                    child: Icon(
+                      Icons.person, // Icon to display inside the circle avatar
+                      size: 40, // Size of the icon
+                      color: Colors.white, // Color of the icon
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  height: 15,
+                ),
+                _itemProfile("Nom et Prénom", user?.name ?? "undefined",
+                    CupertinoIcons.person),
+                const SizedBox(
+                  height: 15,
+                ),
+                _itemProfile(
+                    "Tél", user?.phone ?? "undefined", CupertinoIcons.phone),
+                const SizedBox(
+                  height: 15,
+                ),
+                _itemProfile(
+                    "Mail", user?.email ?? "undefined", CupertinoIcons.mail),
+                const SizedBox(
+                  height: 15,
+                ),
+                // _editBtn(context)
+              ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            _itemProfile(
-                "Nom et Prénom", "Mohamed Besha Frikha", CupertinoIcons.person),
-            const SizedBox(
-              height: 15,
-            ),
-            _itemProfile("Tél", "93203366", CupertinoIcons.phone),
-            const SizedBox(
-              height: 15,
-            ),
-            _itemProfile(
-                "Address", "Rte De tunis 8km", CupertinoIcons.location),
-            const SizedBox(
-              height: 15,
-            ),
-            _itemProfile("Mail", "medbesha@gamil.com", CupertinoIcons.mail),
-            const SizedBox(
-              height: 15,
-            ),
-            _itemProfile("CIN", "00000000", CupertinoIcons.barcode),
-            const SizedBox(
-              height: 15,
-            ),
-            _EditBtn(context)
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -81,20 +83,17 @@ Widget _itemProfile(String title, String subtitle, IconData iconData) {
       iconData,
       color: Colors.blue,
     ),
-
     tileColor: Colors.white,
-    //push to edit profile
     onTap: () {},
   );
 }
 
-Widget _EditBtn(context) {
+Widget _editBtn(context) {
   return OutlinedButton(
     onPressed: () {
       Navigator.pushNamed(context, "/editprofile");
     },
     style: OutlinedButton.styleFrom(
-        // shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
         side: const BorderSide(color: Colors.blue, width: 1)),
     child: const SizedBox(
