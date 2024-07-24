@@ -8,7 +8,7 @@ import 'package:immo_manager/models/propertyModel.dart';
 class ImageUploadModal extends StatefulWidget {
   final Property property;
 
-  ImageUploadModal({required this.property});
+  const ImageUploadModal({super.key, required this.property});
 
   @override
   _ImageUploadModalState createState() => _ImageUploadModalState();
@@ -21,7 +21,7 @@ class _ImageUploadModalState extends State<ImageUploadModal> {
   Future<void> _pickImages() async {
     try {
       final result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
+        allowMultiple: false,
         type: FileType.image,
       );
 
@@ -65,10 +65,10 @@ class _ImageUploadModalState extends State<ImageUploadModal> {
 
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'Images uploaded successfully');
-        Navigator.of(context).pop(); // Close the modal
+        Get.offNamed("/userproperties");
       } else {
         final responseBody = await response.stream.bytesToString();
-        Get.snackbar('Error', 'Failed to upload images: ${responseBody}');
+        Get.snackbar('Error', 'Failed to upload images: $responseBody');
       }
     } catch (e) {
       Get.snackbar('Error', 'An unexpected error occurred: ${e.toString()}');
@@ -87,37 +87,39 @@ class _ImageUploadModalState extends State<ImageUploadModal> {
           children: [
             Text(
               'Upload images for ${widget.property.name}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _pickImages,
-              child: Text('Pick Images'),
+              child: const Text('Pick Images'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _selectedImages.isNotEmpty
                 ? Column(
-                    children: _selectedImages.map((imageData) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Image.memory(imageData, height: 100),
-                      );
-                    }).toList(),
+                    children: _selectedImages.map(
+                      (imageData) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Image.memory(imageData, height: 100),
+                        );
+                      },
+                    ).toList(),
                   )
-                : Text('No images selected'),
-            SizedBox(height: 20),
+                : const Text('No images selected'),
+            const SizedBox(height: 20),
             Obx(() => isUploading.value
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _uploadImages,
-                    child: Text('Upload Images'),
+                    child: const Text('Upload Images'),
                   )),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the modal
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         ),

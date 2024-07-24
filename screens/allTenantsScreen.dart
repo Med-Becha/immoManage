@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AllUsersScreen extends StatelessWidget {
-  const AllUsersScreen({super.key});
+import 'package:immo_manager/controller/tenantsController.dart';
+import 'package:immo_manager/models/tenantModel.dart';
+
+class AllTenantsScreen extends StatelessWidget {
+  const AllTenantsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TenantController tenantController = Get.find<TenantController>();
+
+    // Fetch tenants data when the screen is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      tenantController.fetchAllTenants();
+    });
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -14,45 +25,24 @@ class AllUsersScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: ListView(
-        children: _buildList(),
-      ),
+      body: Obx(() {
+        if (tenantController.allTenants.isEmpty) {
+          return const Center(
+            child: Text("no tenants "),
+          );
+        } else {
+          return ListView(
+            children: _buildList(tenantController.allTenants),
+          );
+        }
+      }),
     );
   }
 
-  List<Widget> _buildList() {
-    List<String> titles = [
-      'Ahmed Ahmed',
-      'malek malek',
-      'racem racem',
-      'hassan hassan'
-          'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan' 'racem racem',
-      'hassan hassan'
-    ];
-    List<String> subtitles = [
-      'Ahmed@gmail.com',
-      'malek@gmail.com',
-      'racem@gmail.com',
-      '+2169336666655'
-          'racem@gmail.com',
-      '+2169336666655',
-      'racem@gmail.com',
-      '+2169336666655',
-      'racem@gmail.com',
-      '+2169336666655',
-      'racem@gmail.com',
-      '+2169336666655'
-    ];
-
+  List<Widget> _buildList(List<Tenant> tenants) {
     List<Widget> listTiles = [];
 
-    for (int i = 0; i < titles.length; i++) {
+    for (final tenant in tenants) {
       listTiles.add(
         ListTile(
           hoverColor: const Color.fromARGB(78, 3, 168, 244),
@@ -61,11 +51,11 @@ class AllUsersScreen extends StatelessWidget {
             color: Colors.blue,
           ),
           title: Text(
-            titles[i],
+            tenant.name, // Use appropriate fallback
             style: const TextStyle(color: Colors.blue),
           ),
           subtitle: Text(
-            subtitles[i],
+            tenant.email, // Use appropriate fallback
             style: const TextStyle(color: Colors.blue),
           ),
           trailing: const Icon(
@@ -74,7 +64,7 @@ class AllUsersScreen extends StatelessWidget {
           ),
           onTap: () {
             // Handle tap
-            print('Tapped on ${titles[i]}');
+            print('Tapped on ${tenant.name}');
           },
         ),
       );

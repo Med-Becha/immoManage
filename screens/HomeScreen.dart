@@ -10,12 +10,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PropertyController _propertyController =
+    final PropertyController propertyController =
         Get.find<PropertyController>();
 
     // Fetch all properties when the screen is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _propertyController.fetchAllProperties();
+      propertyController.fetchAllProperties();
     });
 
     return Scaffold(
@@ -45,22 +45,22 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Obx(() {
-        if (_propertyController.isLoading.value) {
+        if (propertyController.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (_propertyController.allProperties.isEmpty) {
-          return Center(child: Text('No properties found'));
+        if (propertyController.allProperties.isEmpty) {
+          return const Center(child: Text('No properties found'));
         }
 
         return RefreshIndicator(
           onRefresh: () async {
-            await _propertyController.fetchAllProperties();
+            await propertyController.fetchAllProperties();
           },
           child: ListView.builder(
-            itemCount: _propertyController.allProperties.length,
+            itemCount: propertyController.allProperties.length,
             itemBuilder: (context, index) {
-              final property = _propertyController.allProperties[index];
+              final property = propertyController.allProperties[index];
               return Immoitem(
                 header: property.name,
                 localisation: property.location,

@@ -39,11 +39,24 @@ class LeftDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
             title: const Text(
-              'Mon Propriétés',
+              'Mes Propriétés',
               style: TextStyle(color: Colors.blue),
             ),
             onTap: () {
               Navigator.of(context).pushNamed("/userproperties");
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.people_alt_rounded,
+              color: Colors.blue,
+            ),
+            title: const Text(
+              'Mes Locataires',
+              style: TextStyle(color: Colors.blue),
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed("/usertenants");
             },
           ),
           ListTile(

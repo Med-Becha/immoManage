@@ -87,22 +87,3 @@ Widget _itemProfile(String title, String subtitle, IconData iconData) {
     onTap: () {},
   );
 }
-
-Widget _editBtn(context) {
-  return OutlinedButton(
-    onPressed: () {
-      Navigator.pushNamed(context, "/editprofile");
-    },
-    style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        side: const BorderSide(color: Colors.blue, width: 1)),
-    child: const SizedBox(
-      width: double.infinity,
-      child: Text(
-        'Modifier',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20, color: Colors.blue),
-      ),
-    ),
-  );
-}

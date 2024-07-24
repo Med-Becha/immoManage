@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:immo_manager/screens/addPropertiesScreen.dart';
-import 'package:immo_manager/screens/AllUsersScreen.dart';
+import 'package:immo_manager/screens/allTenantsScreen.dart';
 import 'package:immo_manager/screens/ContractScreen.dart';
-import 'package:immo_manager/screens/Dashboard.dart';
+import 'package:immo_manager/screens/dashboardScreen.dart';
 import 'package:immo_manager/screens/EditProfileScreen.dart';
 import 'package:immo_manager/screens/homeScreen.dart';
 import 'package:immo_manager/screens/ProfileScreen.dart';
 import 'package:immo_manager/screens/SigninScreen.dart';
 import 'package:immo_manager/screens/UserPropertiesScreen.dart';
 import 'package:immo_manager/screens/loginScreen.dart';
+import 'package:immo_manager/screens/userTenantsScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -26,13 +27,15 @@ class RouteGenerator {
       case "/chart":
         return MaterialPageRoute(builder: (_) => const Dashboard());
       case "/allusers":
-        return MaterialPageRoute(builder: (_) => const AllUsersScreen());
+        return MaterialPageRoute(builder: (_) => const AllTenantsScreen());
       case "/contracts":
         return MaterialPageRoute(builder: (_) => const ContractScreen());
       case '/addproperties':
         return MaterialPageRoute(builder: (_) => AddPropertiesScreen());
       case "/editprofile":
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+      case "/usertenants":
+        return MaterialPageRoute(builder: (_) => const UserTenantsScreen());
       default:
         return _errorRoute();
     }

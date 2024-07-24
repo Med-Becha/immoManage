@@ -77,7 +77,6 @@ class PropertyController extends GetxController {
         final List<Property> properties =
             jsonResponse.map((json) => Property.fromJson(json)).toList();
         userProperties.value = properties;
-        Get.snackbar('Success', 'User properties fetched successfully');
       } else {
         Get.snackbar(
             'Error', 'Failed to fetch user properties: ${response.body}');
@@ -105,6 +104,68 @@ class PropertyController extends GetxController {
             jsonResponse.map((data) => Property.fromJson(data)).toList();
       } else {
         Get.snackbar('Error', 'Failed to fetch properties: ${response.body}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An unexpected error occurred: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Delete a property by id
+  Future<void> deleteProperty(int id) async {
+    isLoading.value = true;
+
+    try {
+      final response = await http.delete(
+        Uri.parse('http://localhost:8080/property/$id'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        userProperties.removeWhere((property) => property.id == id);
+        allProperties.removeWhere((property) => property.id == id);
+        Get.snackbar('Success', 'Property deleted successfully');
+      } else {
+        Get.snackbar('Error', 'Failed to delete property: ${response.body}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An unexpected error occurred: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Patch a property
+  Future<void> patchProperty(int id, Property updatedProperty) async {
+    isLoading.value = true;
+
+    try {
+      final Map<String, dynamic> patchData = {
+        'name': updatedProperty.name,
+        'description': updatedProperty.description,
+        'details': updatedProperty.details,
+        'sizes': updatedProperty.sizes,
+        'location': updatedProperty.location,
+        'price': updatedProperty.price,
+        'equipment': updatedProperty.equipment,
+        'status': updatedProperty.status,
+      };
+
+      final response = await http.patch(
+        Uri.parse('http://localhost:8080/property/$id'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(patchData),
+      );
+
+      if (response.statusCode == 200) {
+        Get.snackbar('Success', response.body);
+        await fetchUserProperties();
+        await fetchAllProperties();
+        // Navigate back to the previous screen
+        Get.back();
+      } else {
+        Get.snackbar('Error', 'Failed to update property: ${response.body}');
       }
     } catch (e) {
       Get.snackbar('Error', 'An unexpected error occurred: ${e.toString()}');

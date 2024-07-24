@@ -3,28 +3,35 @@ import 'package:immo_manager/widgets/ImmoItemTrait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Immoitem extends StatelessWidget {
-  const Immoitem(
-      {super.key,
-      required this.header,
-      required this.localisation,
-      required this.label,
-      required this.imgUrl,
-      required this.occupation});
+  const Immoitem({
+    super.key,
+    required this.header,
+    required this.localisation,
+    required this.label,
+    required this.imgUrl,
+    required this.occupation,
+    this.onLongPress,
+    this.onTap,
+  });
+
   final String header;
   final String localisation;
   final String label;
   final String imgUrl;
   final String occupation;
+  final VoidCallback? onLongPress;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      clipBehavior: Clip.hardEdge,
-      elevation: 3,
-      child: InkWell(
-        onTap: () {},
+    return GestureDetector(
+      onLongPress: onLongPress,
+      onTap: onTap,
+      child: Card(
+        margin: const EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        clipBehavior: Clip.hardEdge,
+        elevation: 3,
         child: Stack(
           children: [
             FadeInImage(
@@ -46,27 +53,30 @@ class Immoitem extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(
                   children: [
-                    Text(header,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                    Text(
+                      header,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                     Row(
                       children: [
                         ImmoItemTrait(
                           label: label,
                           localisation: localisation,
-                        )
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

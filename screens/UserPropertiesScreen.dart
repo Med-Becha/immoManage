@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:immo_manager/controller/propertyController.dart';
 import 'package:immo_manager/widgets/ImmoItem.dart';
+import 'propertyDetailsScreen.dart';
 
 class UserPropertiesScreen extends StatefulWidget {
   const UserPropertiesScreen({super.key});
@@ -24,6 +25,33 @@ class _UserPropertiesScreenState extends State<UserPropertiesScreen> {
   // Fetch user properties
   Future<void> _fetchProperties() async {
     await _propertyController.fetchUserProperties();
+  }
+
+  void _confirmDeleteProperty(int id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Deletion'),
+          content: const Text('Are you sure you want to delete this property?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await _propertyController.deleteProperty(id);
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -56,7 +84,7 @@ class _UserPropertiesScreenState extends State<UserPropertiesScreen> {
           }
 
           if (_propertyController.userProperties.isEmpty) {
-            return Center(child: Text('No properties found'));
+            return const Center(child: Text('No properties found'));
           }
 
           return ListView.builder(
@@ -71,6 +99,14 @@ class _UserPropertiesScreenState extends State<UserPropertiesScreen> {
                     ? "http://localhost:8080/images/${property.images!.first.name}" // Display the first image URL
                     : "https://images.unsplash.com/photo-1516883870728-9e398630f638?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image URL
                 occupation: property.status,
+                onLongPress: () => _confirmDeleteProperty(property.id),
+                onTap: () {
+                  print("presed");
+                  Get.to(
+                    () => PropertyDetailsScreen(property: property),
+                    transition: Transition.rightToLeft,
+                  );
+                },
               );
             },
           );
