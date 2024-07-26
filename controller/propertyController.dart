@@ -138,8 +138,6 @@ class PropertyController extends GetxController {
 
   // Patch a property
   Future<void> patchProperty(int id, Property updatedProperty) async {
-    isLoading.value = true;
-
     try {
       final Map<String, dynamic> patchData = {
         'name': updatedProperty.name,
@@ -157,13 +155,13 @@ class PropertyController extends GetxController {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(patchData),
       );
-
-      if (response.statusCode == 200) {
-        Get.snackbar('Success', response.body);
+      final int res = response.statusCode;
+      if (res == 200) {
         await fetchUserProperties();
         await fetchAllProperties();
         // Navigate back to the previous screen
         Get.back();
+        Get.snackbar('Success', "updated successfuly");
       } else {
         Get.snackbar('Error', 'Failed to update property: ${response.body}');
       }

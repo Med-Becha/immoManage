@@ -61,9 +61,6 @@ class _EditPropertyScreenState extends State<EditPropertyScreen> {
 
     await _propertyController.patchProperty(
         updatedProperty.id, updatedProperty);
-
-    // Navigate back to the previous screen after a successful update
-    Get.back();
   }
 
   @override

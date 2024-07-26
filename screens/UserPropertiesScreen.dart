@@ -101,7 +101,6 @@ class _UserPropertiesScreenState extends State<UserPropertiesScreen> {
                 occupation: property.status,
                 onLongPress: () => _confirmDeleteProperty(property.id),
                 onTap: () {
-                  print("presed");
                   Get.to(
                     () => PropertyDetailsScreen(property: property),
                     transition: Transition.rightToLeft,
